@@ -1,18 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import BookCard from './BookCard';
+import { BookContext } from '../context/BookContext';
+import { CartContext } from '../context/CartContext';
 
-const BookList = ({ books, onAddToCart }) => (
-  <div className="book-list">
-    {books.map(book => (
-      <BookCard key={book.id} book={book} onAddToCart={onAddToCart} />
-    ))}
-  </div>
-);
+const BookList = () => {
+  const { books } = useContext(BookContext);
+  const { addToCart } = useContext(CartContext);
 
-BookList.propTypes = {
-  books: PropTypes.array.isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {books.map((book) => (
+        <BookCard key={book.id} book={book} onAddToCart={addToCart} />
+      ))}
+    </div>
+  );
 };
 
 export default BookList;

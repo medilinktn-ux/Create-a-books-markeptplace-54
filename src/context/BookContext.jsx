@@ -1,18 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
+import mockBooks from '../data/mockBooks';
 
 export const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    setBooks([
-      { id: 1, title: 'Sample Book', price: 9.99 },
-    ]);
-  }, []);
+  const [books] = useState(mockBooks);
 
   return (
-    <BookContext.Provider value={{ books, setBooks }}>
+    <BookContext.Provider value={{ books }}>
       {children}
     </BookContext.Provider>
   );

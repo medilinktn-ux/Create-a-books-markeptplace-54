@@ -1,14 +1,19 @@
-import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
-export default function Header() {
-  const [open, setOpen] = useState(false)
+const Header = () => {
+  const { cart } = useContext(CartContext);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
-    <header className="flex items-center justify-between p-4 bg-gray-800 text-white">
+    <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
       <h1 className="text-xl font-bold">BookStore</h1>
-      <button onClick={() => setOpen(!open)}>
-        {open ? <X /> : <Menu />}
-      </button>
+      <nav className="space-x-4">
+        <a href="/" className="hover:underline">Home</a>
+        <a href="/cart" className="hover:underline">Cart ({cartCount})</a>
+      </nav>
     </header>
-  )
-}
+  );
+};
+
+export default Header;
