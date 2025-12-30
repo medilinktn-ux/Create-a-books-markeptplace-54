@@ -11,7 +11,7 @@ function App() {
   return (
     <BookProvider>
       <CartProvider>
-        <Router>
+        <Router basename="/Create-a-books-markeptplace-54">
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
