@@ -1,30 +1,16 @@
-import React, { useEffect } from 'react';
-import { useBooks } from '../context/BookContext';
+import React, { useContext } from 'react';
 import BookList from '../components/BookList';
+import { BookContext } from '../context/BookContext';
+import { CartContext } from '../context/CartContext';
 
 const HomePage = () => {
-  const { books, setBooks } = useBooks();
-
-  useEffect(() => {
-    // Simulate fetching books
-    setBooks([
-      { id: 1, title: 'Book One' },
-      { id: 2, title: 'Book Two' },
-    ]);
-  }, [setBooks]);
-
-  const handleAddToCart = (book) => {
-    console.log('Add to cart:', book);
-  };
-
-  const handleViewDetails = (id) => {
-    console.log('View details:', id);
-  };
+  const { books } = useContext(BookContext);
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div>
       <h1>Book Store</h1>
-      <BookList books={books} onAddToCart={handleAddToCart} onViewDetails={handleViewDetails} />
+      <BookList books={books} onAddToCart={addToCart} />
     </div>
   );
 };
